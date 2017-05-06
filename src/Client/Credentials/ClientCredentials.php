@@ -6,10 +6,6 @@
  * Time: 11:14
  */
 
-//@formatter:off
-declare(strict_types=1);
-//@formatter:on
-
 namespace LeadDesk\Lib\LeadDeskApiClient\Client\Credentials;
 
 
