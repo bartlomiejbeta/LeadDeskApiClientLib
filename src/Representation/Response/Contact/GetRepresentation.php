@@ -10,17 +10,17 @@
 declare(strict_types=1);
 //@formatter:on
 
-namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Contact;
+namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact;
 
 
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\Embedded\ContactData;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\Embedded\ContactData;
 use JMS\Serializer\Annotation as Serializer;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentationInterface;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class GetRepresentation implements RepresentationInterface
+class GetRepresentation implements ResponseRepresentationInterface
 {
 	/**
 	 * @var boolean
@@ -43,7 +43,7 @@ class GetRepresentation implements RepresentationInterface
 	/**
 	 * @var ContactData
 	 *
-	 * @Serializer\Type("LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\Embedded\ContactData")
+	 * @Serializer\Type("LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\Embedded\ContactData")
 	 * @Serializer\Accessor(getter="getData", setter="setData")
 	 * @Serializer\Expose()
 	 */

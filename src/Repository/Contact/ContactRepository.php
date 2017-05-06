@@ -13,9 +13,12 @@ declare(strict_types=1);
 namespace LeadDesk\Lib\LeadDeskApiClient\Repository\Contact;
 
 
+use JMS\Serializer\SerializerBuilder;
+use JMS\Serializer\SerializerInterface;
 use LeadDesk\Lib\LeadDeskApiClient\Client\Credentials\CredentialsInterface;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactIdFilter;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Request\Contact\ContactRepresentation;
 
 class ContactRepository
 {
@@ -24,9 +27,16 @@ class ContactRepository
 	 */
 	private static $credentials;
 
+	/**
+	 * @var SerializerInterface
+	 */
+	private static $serializer;
+
 	public function __construct(CredentialsInterface $credentials)
 	{
 		self::$credentials = $credentials;
+		self::$serializer = SerializerBuilder::create()->build();
+
 	}
 
 	/**
@@ -105,6 +115,41 @@ class ContactRepository
 		];
 
 		return array_merge($modParameter, $cmd, $parametersFromFilter);
+	}
+
+
+	/**
+	 * @param ContactIdFilter $contactIdFilter
+	 *
+	 * @return array
+	 */
+	public static function getDeleteContactParameters(ContactIdFilter $contactIdFilter)
+	{
+		$modParameter         = self::getStaticModParameter();
+		$parametersFromFilter = [
+			'contact_id' => $contactIdFilter->getContactId(),
+		];
+		$cmd                  = [
+			'cmd' => 'delete',
+		];
+
+		return array_merge($modParameter, $cmd, $parametersFromFilter);
+	}
+
+	/**
+	 * @param ContactRepresentation $contactRepresentation
+	 *
+	 * @return array
+	 */
+	public static function getCreateContactParameters(ContactRepresentation $contactRepresentation)
+	{
+		$modParameter      = self::getStaticModParameter();
+		$contactParameters = self::$serializer->toArray($contactRepresentation);
+		$cmd               = [
+			'cmd' => 'add',
+		];
+
+		return array_merge($modParameter, $cmd, $contactParameters);
 	}
 
 	/**

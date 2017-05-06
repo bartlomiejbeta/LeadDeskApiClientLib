@@ -6,16 +6,16 @@
  * Time: 15:30
  */
 
-namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Contact;
+namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact;
 
 
-use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
 use JMS\Serializer\Annotation as Serializer;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentationInterface;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class FindRepresentation implements RepresentationInterface
+class FindRepresentation implements ResponseRepresentationInterface
 {
 	/**
 	 * @var boolean
@@ -103,5 +103,4 @@ class FindRepresentation implements RepresentationInterface
 
 		return $this;
 	}
-
 }

@@ -3,20 +3,24 @@
  * Created by PhpStorm.
  * User: bartb
  * Date: 06.05.2017
- * Time: 15:32
+ * Time: 20:05
  */
 
-namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Contact;
+//@formatter:off
+declare(strict_types=1);
+//@formatter:on
 
+namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact;
 
-use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
 use JMS\Serializer\Annotation as Serializer;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentationInterface;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class ExistRepresentation implements RepresentationInterface
+class CreateRepresentation implements ResponseRepresentationInterface
 {
+
 	/**
 	 * @var boolean
 	 *
@@ -27,13 +31,13 @@ class ExistRepresentation implements RepresentationInterface
 	private $success;
 
 	/**
-	 * @var boolean
+	 * @var int
 	 *
-	 * @Serializer\Type("boolean")
-	 * @Serializer\Accessor(getter="getMatch", setter="setMatch")
+	 * @Serializer\Type("integer")
+	 * @Serializer\Accessor(getter="getContactId", setter="setContactId")
 	 * @Serializer\Expose()
 	 */
-	private $match;
+	private $contactId;
 
 	/**
 	 * @return bool
@@ -55,22 +59,23 @@ class ExistRepresentation implements RepresentationInterface
 		return $this;
 	}
 
+
 	/**
-	 * @return bool
+	 * @return int
 	 */
-	public function getMatch()
+	public function getContactId()
 	{
-		return $this->match;
+		return $this->contactId;
 	}
 
 	/**
-	 * @param bool $match
+	 * @param int $contactId
 	 *
 	 * @return $this
 	 */
-	public function setMatch($match)
+	public function setContactId($contactId)
 	{
-		$this->match = $match;
+		$this->contactId = $contactId;
 
 		return $this;
 	}

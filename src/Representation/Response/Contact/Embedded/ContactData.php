@@ -10,17 +10,16 @@
 declare(strict_types=1);
 //@formatter:on
 
-namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\Embedded;
+namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\Embedded;
 
-
-use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
 
 use JMS\Serializer\Annotation as Serializer;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentationInterface;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class ContactData implements RepresentationInterface
+class ContactData implements ResponseRepresentationInterface
 {
 	/**
 	 * @var int

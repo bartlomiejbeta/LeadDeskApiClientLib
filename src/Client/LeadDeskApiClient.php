@@ -19,9 +19,12 @@ use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactIdFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Http\RequestFactory;
 use LeadDesk\Lib\LeadDeskApiClient\Repository\Contact\ContactRepository;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\ExistRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\FindRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Contact\GetRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Request\Contact\ContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\CreateRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\DeleteRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\ExistRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\FindRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\GetRepresentation;
 use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -78,6 +81,34 @@ class LeadDeskApiClient
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getGetContactParameters($contactIdFilter));
 		$response          = $this->apiClient->sendRequest($request, GetRepresentation::class);
+
+		return $response->getRepresentation();
+	}
+
+	/**
+	 * @param ContactIdFilter $contactIdFilter
+	 *
+	 * @return DeleteRepresentation|RepresentationInterface
+	 */
+	public function deleteContact(ContactIdFilter $contactIdFilter)
+	{
+		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
+		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getDeleteContactParameters($contactIdFilter));
+		$response          = $this->apiClient->sendRequest($request, DeleteRepresentation::class);
+
+		return $response->getRepresentation();
+	}
+
+	/**
+	 * @param ContactRepresentation $contactRepresentation
+	 *
+	 * @return CreateRepresentation|RepresentationInterface
+	 */
+	public function createContact(ContactRepresentation $contactRepresentation)
+	{
+		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
+		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getCreateContactParameters($contactRepresentation));
+		$response          = $this->apiClient->sendRequest($request, CreateRepresentation::class);
 
 		return $response->getRepresentation();
 	}
