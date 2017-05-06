@@ -57,7 +57,7 @@ $apiClient = new ApiClient($httpsClient, $clientCredentials, $msg, $stream);
 $apiClient->sendRequest($request);
 ```
 
-# LeadDeskApi Usage
+## LeadDeskApi Usage
 
 ```php
 /** but also you can use some already implemented lead desk endpoints by using this */
