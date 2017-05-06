@@ -1,10 +1,11 @@
 # LeadDeskApiClientLib
 
-This repository holds client library for lead-desk api. It used HTTPlug to make client more flexible
+This repository holds client library for lead-desk api. It uses HTTPlug to make the client more flexible.
 
-More info can be found on http://leaddesk.com/
+More info about LD can be found on http://leaddesk.com/
+More info about HTTPlug can be found on http://docs.php-http.org/en/latest/httplug/introduction.html
 
-#TODO
+# TODO
 - add cache support
 - add more lead desk api endpoints (feel free to PR)
 - add tests
@@ -56,10 +57,10 @@ $apiClient = new ApiClient($httpsClient, $clientCredentials, $msg, $stream);
 $apiClient->sendRequest($request);
 ```
 
-#LeadDeskApi Usage
+# LeadDeskApi Usage
 
 ```php
-/** but also you can use implemented some of lead desk endpoints by using this */
+/** but also you can use some already implemented lead desk endpoints by using this */
 $leadDeskApi = new LeadDeskApiClient($apiClient);
 
 /** contact exists -> refere to lead desk api documentation */
@@ -80,8 +81,8 @@ $existRepresentation = $leadDeskApi->deleteContact($contactFilter);// @see Exist
 
 /** create contact -> refere to lead desk api documentation */
 $contactRepresentation = (new ContactRepresentation())
-							->setPhone($phone)
-							...;
+				->setPhone($phone)
+				...;
 							
 $createRepresentation   = $leadDeskApi->createContact($contactRepresentation);// @see CreateRepresentation
 
