@@ -3,6 +3,7 @@
 This repository holds client library for lead-desk api. It uses HTTPlug to make the client more flexible.
 
 More info about LD can be found on http://leaddesk.com/
+
 More info about HTTPlug can be found on http://docs.php-http.org/en/latest/httplug/introduction.html
 
 # TODO
