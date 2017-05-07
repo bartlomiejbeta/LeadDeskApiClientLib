@@ -79,6 +79,15 @@ class ContactRepresentation implements RequestRepresentationInterface
 	 * @var string
 	 *
 	 * @Serializer\Type("string")
+	 * @Serializer\Accessor(getter="getOther27", setter="setOther27")
+	 * @Serializer\Expose()
+	 */
+	private $other27;
+
+	/**
+	 * @var string
+	 *
+	 * @Serializer\Type("string")
 	 * @Serializer\Accessor(getter="getOrder", setter="setOrder")
 	 * @Serializer\Expose()
 	 */
@@ -336,6 +345,26 @@ class ContactRepresentation implements RequestRepresentationInterface
 	public function setList($list)
 	{
 		$this->list = $list;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getOther27()
+	{
+		return $this->other27;
+	}
+
+	/**
+	 * @param string $other27
+	 *
+	 * @return $this
+	 */
+	public function setOther27($other27)
+	{
+		$this->other27 = $other27;
 
 		return $this;
 	}
