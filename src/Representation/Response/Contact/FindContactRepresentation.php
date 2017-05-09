@@ -15,7 +15,7 @@ use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentatio
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class FindRepresentation implements ResponseRepresentationInterface
+class FindContactRepresentation implements ResponseRepresentationInterface
 {
 	/**
 	 * @var boolean

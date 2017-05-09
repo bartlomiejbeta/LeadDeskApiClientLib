@@ -6,10 +6,6 @@
  * Time: 20:05
  */
 
-//@formatter:off
-declare(strict_types=1);
-//@formatter:on
-
 namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact;
 
 use JMS\Serializer\Annotation as Serializer;
@@ -18,7 +14,7 @@ use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentatio
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class CreateRepresentation implements ResponseRepresentationInterface
+class CreateContactRepresentation implements ResponseRepresentationInterface
 {
 
 	/**

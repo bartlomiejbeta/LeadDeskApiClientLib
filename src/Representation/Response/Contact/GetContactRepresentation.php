@@ -6,21 +6,17 @@
  * Time: 16:37
  */
 
-//@formatter:off
-declare(strict_types=1);
-//@formatter:on
-
 namespace LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact;
 
 
 use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\Embedded\ContactData;
-use JMS\Serializer\Annotation as Serializer;
 use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\ResponseRepresentationInterface;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @Serializer\ExclusionPolicy("all")
  */
-class GetRepresentation implements ResponseRepresentationInterface
+class GetContactRepresentation implements ResponseRepresentationInterface
 {
 	/**
 	 * @var boolean

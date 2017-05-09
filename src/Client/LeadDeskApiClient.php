@@ -6,25 +6,24 @@
  * Time: 12:10
  */
 
-//@formatter:off
-declare(strict_types=1);
-//@formatter:on
-
 namespace LeadDesk\Lib\LeadDeskApiClient\Client;
 
 
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
+use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\CallRefIdFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactIdFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Http\RequestFactory;
+use LeadDesk\Lib\LeadDeskApiClient\Repository\Call\CallRepository;
 use LeadDesk\Lib\LeadDeskApiClient\Repository\Contact\ContactRepository;
 use LeadDesk\Lib\LeadDeskApiClient\Representation\Request\Contact\ContactRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\CreateRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\DeleteRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\ExistRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\FindRepresentation;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\GetRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Call\GetCallRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\CreateContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\DeleteContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\ExistContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\FindContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Representation\Response\Contact\GetContactRepresentation;
 use LeadDesk\Lib\LeadDeskApiClient\Representation\RepresentationInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -46,13 +45,13 @@ class LeadDeskApiClient
 	/**
 	 * @param ContactFilter $contactFilter
 	 *
-	 * @return ExistRepresentation|RepresentationInterface
+	 * @return ExistContactRepresentation|RepresentationInterface
 	 */
 	public function contactExists(ContactFilter $contactFilter)
 	{
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getExistsParameters($contactFilter));
-		$response          = $this->apiClient->sendRequest($request, ExistRepresentation::class);
+		$response          = $this->apiClient->sendRequest($request, ExistContactRepresentation::class);
 
 		return $response->getRepresentation();
 	}
@@ -60,13 +59,13 @@ class LeadDeskApiClient
 	/**
 	 * @param ContactFilter $contactFilter
 	 *
-	 * @return FindRepresentation|RepresentationInterface
+	 * @return FindContactRepresentation|RepresentationInterface
 	 */
 	public function findContact(ContactFilter $contactFilter)
 	{
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getFindParameters($contactFilter));
-		$response          = $this->apiClient->sendRequest($request, FindRepresentation::class);
+		$response          = $this->apiClient->sendRequest($request, FindContactRepresentation::class);
 
 		return $response->getRepresentation();
 	}
@@ -74,13 +73,27 @@ class LeadDeskApiClient
 	/**
 	 * @param ContactIdFilter $contactIdFilter
 	 *
-	 * @return GetRepresentation|RepresentationInterface
+	 * @return GetContactRepresentation|RepresentationInterface
 	 */
 	public function getContact(ContactIdFilter $contactIdFilter)
 	{
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getGetContactParameters($contactIdFilter));
-		$response          = $this->apiClient->sendRequest($request, GetRepresentation::class);
+		$response          = $this->apiClient->sendRequest($request, GetContactRepresentation::class);
+
+		return $response->getRepresentation();
+	}
+
+	/**
+	 * @param CallRefIdFilter $callRefIdFilter
+	 *
+	 * @return GetCallRepresentation|RepresentationInterface
+	 */
+	public function getCallDataByCallRefId(CallRefIdFilter $callRefIdFilter)
+	{
+		$callRepository = (new CallRepository($this->apiClient->getCredentials()));
+		$request           = $this->createRequest(RequestFactory::METHOD_GET, $callRepository::getGetCallParameters($callRefIdFilter));
+		$response          = $this->apiClient->sendRequest($request, GetCallRepresentation::class);
 
 		return $response->getRepresentation();
 	}
@@ -88,13 +101,13 @@ class LeadDeskApiClient
 	/**
 	 * @param ContactIdFilter $contactIdFilter
 	 *
-	 * @return DeleteRepresentation|RepresentationInterface
+	 * @return DeleteContactRepresentation|RepresentationInterface
 	 */
 	public function deleteContact(ContactIdFilter $contactIdFilter)
 	{
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getDeleteContactParameters($contactIdFilter));
-		$response          = $this->apiClient->sendRequest($request, DeleteRepresentation::class);
+		$response          = $this->apiClient->sendRequest($request, DeleteContactRepresentation::class);
 
 		return $response->getRepresentation();
 	}
@@ -102,13 +115,13 @@ class LeadDeskApiClient
 	/**
 	 * @param ContactRepresentation $contactRepresentation
 	 *
-	 * @return CreateRepresentation|RepresentationInterface
+	 * @return CreateContactRepresentation|RepresentationInterface
 	 */
 	public function createContact(ContactRepresentation $contactRepresentation)
 	{
 		$contactRepository = (new ContactRepository($this->apiClient->getCredentials()));
 		$request           = $this->createRequest(RequestFactory::METHOD_GET, $contactRepository::getCreateContactParameters($contactRepresentation));
-		$response          = $this->apiClient->sendRequest($request, CreateRepresentation::class);
+		$response          = $this->apiClient->sendRequest($request, CreateContactRepresentation::class);
 
 		return $response->getRepresentation();
 	}
