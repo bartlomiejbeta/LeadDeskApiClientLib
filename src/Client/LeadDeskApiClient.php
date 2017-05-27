@@ -11,7 +11,7 @@ namespace LeadDesk\Lib\LeadDeskApiClient\Client;
 
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
-use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\CallRefIdFilter;
+use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\GetCallInterface;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactIdFilter;
 use LeadDesk\Lib\LeadDeskApiClient\Http\RequestFactory;
@@ -85,14 +85,14 @@ class LeadDeskApiClient
 	}
 
 	/**
-	 * @param CallRefIdFilter $callRefIdFilter
+	 * @param GetCallInterface $getCallData
 	 *
 	 * @return GetCallRepresentation|RepresentationInterface
 	 */
-	public function getCallDataByCallRefId(CallRefIdFilter $callRefIdFilter)
+	public function getCallData(GetCallInterface $getCallData)
 	{
 		$callRepository = (new CallRepository($this->apiClient->getCredentials()));
-		$request           = $this->createRequest(RequestFactory::METHOD_GET, $callRepository::getGetCallParameters($callRefIdFilter));
+		$request           = $this->createRequest(RequestFactory::METHOD_GET, $callRepository::getGetCallParameters($getCallData));
 		$response          = $this->apiClient->sendRequest($request, GetCallRepresentation::class);
 
 		return $response->getRepresentation();

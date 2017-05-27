@@ -9,9 +9,8 @@
 namespace LeadDesk\Lib\LeadDeskApiClient\Filter\Call;
 
 
-use LeadDesk\Lib\LeadDeskApiClient\Filter\FilterInterface;
 
-class CallRefIdFilter implements FilterInterface
+class RefIdFilterCall implements GetCallInterface
 {
 	/** @var int */
 	private $callRefId;

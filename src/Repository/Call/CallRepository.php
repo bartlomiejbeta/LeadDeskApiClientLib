@@ -11,10 +11,9 @@ namespace LeadDesk\Lib\LeadDeskApiClient\Repository\Call;
 use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\SerializerInterface;
 use LeadDesk\Lib\LeadDeskApiClient\Client\Credentials\CredentialsInterface;
-use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\CallRefIdFilter;
-use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactFilter;
-use LeadDesk\Lib\LeadDeskApiClient\Filter\Contact\ContactIdFilter;
-use LeadDesk\Lib\LeadDeskApiClient\Representation\Request\Contact\ContactRepresentation;
+use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\GetCallInterface;
+use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\RefIdFilterCall;
+use LeadDesk\Lib\LeadDeskApiClient\Filter\Call\PhoneFilter;
 
 class CallRepository
 {
@@ -37,16 +36,24 @@ class CallRepository
 
 
 	/**
-	 * @param CallRefIdFilter $callRefIdFilter
+	 * @param GetCallInterface $callGetInterface
 	 *
 	 * @return array
 	 */
-	public static function getGetCallParameters(CallRefIdFilter $callRefIdFilter)
+	public static function getGetCallParameters(GetCallInterface $callGetInterface)
 	{
 		$modParameter         = self::getStaticModParameter();
-		$parametersFromFilter = [
-			'call_ref_id' => $callRefIdFilter->getCallRefId(),
-		];
+		$parametersFromFilter = [];
+
+		if ($callGetInterface instanceof RefIdFilterCall)
+		{
+			$parametersFromFilter['call_ref_id'] = $callGetInterface->getCallRefId();
+		}
+		elseif ($callGetInterface instanceof PhoneFilter)
+		{
+			$parametersFromFilter['phone']= $callGetInterface->getPhone();
+		}
+
 		$cmd                  = [
 			'cmd' => 'get',
 		];
