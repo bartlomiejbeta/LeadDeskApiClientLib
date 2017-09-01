@@ -13,18 +13,7 @@ More info about HTTPlug can be found on http://docs.php-http.org/en/latest/httpl
 
 ## Installing
 
-Add Repository
-
-```
-"repositories": [
-   {
-       "type": "vcs",
-       "url": "https://github.com/bartlomiejbeta/LeadDeskApiClientLib"
-    }
-]
-```
-
-Add package to composer
+Install package via composer
 
 `composer require bartlomiejbeta/lead-desk-api-client-lib`
 
